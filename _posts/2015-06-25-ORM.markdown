@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "ORM"
+date:   2015-06-25 
+categories: definitions
+---
+### What is an ORM?
+
+ORM (or Object Relational Mapping) is a means of converting data from a database system in an object oriented programming language (i.e. from SQL to ). In the object oriented language, tables are represented by Classes and table rows are represented by instances of these Classes.
+
+### How does your ORM help you get all of a particular table's rows from the database?
+
+In my ORM, I use a module of Database Class methods that allows me access to all of a particular table's rows from the database. This Ruby method uses SQL to access all of the rows from a specific table, then stores the results as an Array of objects.
+
+```ruby
+  def all
+    table_name = self.to_s.tableize
+    results = DATABASE.execute("SELECT * FROM #{table_name}")
+    store_results = []
+    results.each do |hash|
+      store_results << self.new(hash)
+    end
+    return store_results
+  end
+```
+
+
+### How does your ORM represent rows from a table, given that Ruby doesn't have a Table data structure?
+
+Given that Ruby doesn't have a table data structure, the ORM represents rows from a table as an instance of a Class. 
+
+### How does your ORM convert rows from a table into the Ruby data structure (which you identified in the previous question)?
+
+I am able to access a specific row from a specific table using the find method in my Database Class methods module, which returns a new object of the class.
+
+```ruby
+  def find(id)
+    table_name = self.to_s.tableize
+    results = DATABASE.execute("SELECT * FROM #{table_name} WHERE id = #{id};").first
+    self.new(results)
+  end
+```
+
