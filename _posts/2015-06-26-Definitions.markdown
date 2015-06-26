@@ -15,7 +15,7 @@ Models are classes that are responsible for handling database interactions and b
 
 ### What is a method?
 
-A method is a function (that returns a value) used to bundle one of more repeatable statements.
+A method is a function (that returns a value) used to bundle one or more repeatable statements.
 
 ### What is a variable?
 
